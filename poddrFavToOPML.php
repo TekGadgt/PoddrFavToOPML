@@ -1,17 +1,18 @@
 <?php
 
 $homeDir = getenv("HOME");
-$podcasts = "$homeDir/Downloads/subscriptions.xml";
-if (!file_exists("$homeDir/snap/poddr/current/.config/poddr/favourites.json")) {
+$favourites = "$homeDir/snap/poddr/current/.config/poddr/favourites.json";
+$subscriptions = "$homeDir/Downloads/subscriptions.xml";
+if (!file_exists($favourites)) {
   echo 'Poddr favourites.json not found.';
   exit;
 } else {
-  if (file_exists($podcasts)) {
-    if (!unlink($podcasts)) {
-      echo "Could not delete $podcasts, please manually delete and try again.";
+  if (file_exists($subscriptions)) {
+    if (!unlink($subscriptions)) {
+      echo "Could not delete $subscriptions, please manually delete and try again.";
       exit;
     } else {
-      echo "Successfully deleted current $podcasts, proceeding to generate new one.";
+      echo "Successfully deleted current $subscriptions, proceeding to generate new one.";
     }
   }
   $dom =  new DOMDocument;
@@ -39,7 +40,7 @@ if (!file_exists("$homeDir/snap/poddr/current/.config/poddr/favourites.json")) {
     $child_outline_node->setAttribute('xmlUrl', $item['rss']);
   }
   $dom->appendChild($root);
-  $dom->save($podcasts);
+  $dom->save($subscriptions);
 }
 
 ?>
