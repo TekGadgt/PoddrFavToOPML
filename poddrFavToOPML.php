@@ -2,7 +2,7 @@
 
 $homeDir = getenv("HOME");
 $podcasts = "$homeDir/Downloads/subscriptions.xml";
-if (!file_exists("$homeDir/snap/poddr/5/.config/poddr/favourites.json")) {
+if (!file_exists("$homeDir/snap/poddr/current/.config/poddr/favourites.json")) {
   echo 'Poddr favourites.json not found.';
   exit;
 } else {
